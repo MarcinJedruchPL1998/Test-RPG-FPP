@@ -62,6 +62,24 @@ public partial class @InputMaster : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Fire"",
+                    ""type"": ""Button"",
+                    ""id"": ""e15aef61-f0f1-4cef-a3c7-e7ae84b07acb"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Sword"",
+                    ""type"": ""Button"",
+                    ""id"": ""9e6319f4-9258-4c87-a2a8-594d19b333f6"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -196,6 +214,28 @@ public partial class @InputMaster : IInputActionCollection2, IDisposable
                     ""action"": ""Use"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0307e3e0-4918-4500-9f61-0fc05ce2cba7"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardAndMouse"",
+                    ""action"": ""Fire"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""74c75024-dc9b-438a-8e88-8c390127c737"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardAndMouse"",
+                    ""action"": ""Sword"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -225,6 +265,8 @@ public partial class @InputMaster : IInputActionCollection2, IDisposable
         m_Player_Look = m_Player.FindAction("Look", throwIfNotFound: true);
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
         m_Player_Use = m_Player.FindAction("Use", throwIfNotFound: true);
+        m_Player_Fire = m_Player.FindAction("Fire", throwIfNotFound: true);
+        m_Player_Sword = m_Player.FindAction("Sword", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -288,6 +330,8 @@ public partial class @InputMaster : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Look;
     private readonly InputAction m_Player_Jump;
     private readonly InputAction m_Player_Use;
+    private readonly InputAction m_Player_Fire;
+    private readonly InputAction m_Player_Sword;
     public struct PlayerActions
     {
         private @InputMaster m_Wrapper;
@@ -296,6 +340,8 @@ public partial class @InputMaster : IInputActionCollection2, IDisposable
         public InputAction @Look => m_Wrapper.m_Player_Look;
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
         public InputAction @Use => m_Wrapper.m_Player_Use;
+        public InputAction @Fire => m_Wrapper.m_Player_Fire;
+        public InputAction @Sword => m_Wrapper.m_Player_Sword;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -317,6 +363,12 @@ public partial class @InputMaster : IInputActionCollection2, IDisposable
                 @Use.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUse;
                 @Use.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUse;
                 @Use.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUse;
+                @Fire.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFire;
+                @Fire.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFire;
+                @Fire.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFire;
+                @Sword.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSword;
+                @Sword.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSword;
+                @Sword.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSword;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -333,6 +385,12 @@ public partial class @InputMaster : IInputActionCollection2, IDisposable
                 @Use.started += instance.OnUse;
                 @Use.performed += instance.OnUse;
                 @Use.canceled += instance.OnUse;
+                @Fire.started += instance.OnFire;
+                @Fire.performed += instance.OnFire;
+                @Fire.canceled += instance.OnFire;
+                @Sword.started += instance.OnSword;
+                @Sword.performed += instance.OnSword;
+                @Sword.canceled += instance.OnSword;
             }
         }
     }
@@ -352,5 +410,7 @@ public partial class @InputMaster : IInputActionCollection2, IDisposable
         void OnLook(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnUse(InputAction.CallbackContext context);
+        void OnFire(InputAction.CallbackContext context);
+        void OnSword(InputAction.CallbackContext context);
     }
 }

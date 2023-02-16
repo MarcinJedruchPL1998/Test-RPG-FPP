@@ -7,7 +7,15 @@ TagManager:
   - przycisk
   - drzwi
   - topory
-  - klucz2
+  - klucz
+  - zdrowie
+  - mana
+  - zloto
+  - ogien
+  - przeciwnik
+  - miecz
+  - przeciwnikZasieg
+  - dzwignia
   layers:
   - Default
   - TransparentFX

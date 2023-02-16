@@ -20,6 +20,8 @@ public class MovementPlayer : MonoBehaviour
 
     bool isGrounded;
 
+    [SerializeField] Keys keyManager;
+
     private void Awake()
     {
         inputMaster = new InputMaster();
@@ -65,5 +67,30 @@ public class MovementPlayer : MonoBehaviour
         {
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
         }
+    }
+
+    public void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.tag == "klucz")
+        {
+            keyManager.GotKey(other.gameObject);
+        }
+        if(other.gameObject.tag == "zdrowie")
+        {
+            GetComponent<LifeCoinsMana>().AddLive();
+            Destroy(other.gameObject);
+        }
+        if(other.gameObject.tag == "mana")
+        {
+            GetComponent<LifeCoinsMana>().AddMana();
+            Destroy(other.gameObject);
+        }
+
+        if(other.gameObject.tag == "zloto")
+        {
+            GetComponent<LifeCoinsMana>().AddCoins();
+            Destroy(other.gameObject);
+        }
+
     }
 }

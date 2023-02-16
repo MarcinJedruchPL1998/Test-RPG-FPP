@@ -27,11 +27,6 @@ public class DoorManager : MonoBehaviour
         }
     }
 
-    public void UnlockDoor()
-    {
-
-    }
-
     public void OpenDoor(GameObject door, int doorIndex)
     {
         GetComponent<AudioSource>().Play();

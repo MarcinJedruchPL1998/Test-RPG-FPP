@@ -14,6 +14,7 @@ public class Raycasting : MonoBehaviour
 
     [SerializeField] DoorManager doorManager;
     [SerializeField] RiddleManager riddleManager;
+
     void Awake()
     {
         inputMaster = new InputMaster();
@@ -54,7 +55,9 @@ public class Raycasting : MonoBehaviour
 
                 if (fClicked)
                 {
-
+                    rayhit.transform.gameObject.GetComponent<Animator>().enabled = true;
+                    rayhit.transform.gameObject.GetComponent<Animator>().Play("dzwignia_on");
+                    doorManager.doorLocked[5] = false;
                 }
             }
 

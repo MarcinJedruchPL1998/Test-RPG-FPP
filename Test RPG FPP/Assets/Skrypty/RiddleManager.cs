@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class RiddleManager : MonoBehaviour
 {
+    [SerializeField] GameObject button_r, button_g, button_b;
     [SerializeField] GameObject riddle_r, riddle_g, riddle_b;
     [SerializeField] float rotateSpeed;
 
@@ -67,6 +68,10 @@ public class RiddleManager : MonoBehaviour
             riddleOK = true;
             rotBridge.GetComponent<Animator>().enabled = true;
             rotBridge.GetComponent<Animator>().Play("most_rotate");
+
+            button_r.GetComponent<BoxCollider>().enabled = false;
+            button_g.GetComponent<BoxCollider>().enabled = false;
+            button_b.GetComponent<BoxCollider>().enabled = false;
 
             GetComponent<AudioSource>().Play();
         }
